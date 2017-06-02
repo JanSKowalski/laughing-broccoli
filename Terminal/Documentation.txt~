@@ -4,15 +4,3 @@ This gui uses the class EventQueue to moderate events/interactions within the po
 
 Resources:
 https://stackoverflow.com/questions/3497889/difference-between-jpanel-jframe-jcomponent-and-japplet
-
-Recognition:
-First example with JScrollPane
-	MadProgrammer (Stackoverflow)
-
-First examples with JFrame, JPanel
-	843789 (Java Oracle)
-	Konstantina Dimtsa (javacodegeeks)
-
-
-	
-
