@@ -1,6 +1,0 @@
-
-
-This gui uses the class EventQueue to moderate events/interactions within the popup window.
-
-Resources:
-https://stackoverflow.com/questions/3497889/difference-between-jpanel-jframe-jcomponent-and-japplet
