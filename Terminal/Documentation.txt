@@ -1,18 +1,44 @@
+Terminal Documentation
+
+This project is designed to emmulate terminal capabilities within a Java environment
+
+Commands can only be supported in this system if their executable can be found in /bin
+
+Supported bash commands:
+    echo
+    mkdir
+    pwd
+    cat (Sort of, separate lines)
+    ls (Sort of, separate lines)
+    rm (-r)
+    java 
+    javac
 
 
-This gui uses the class EventQueue to moderate events/interactions within the popup window.
+Abstract Data Type: Queue
+    **Will be** Used to implement a history command specific to input through 
+this java terminal, rather than the bash terminal history
 
-Resources:
-https://stackoverflow.com/questions/3497889/difference-between-jpanel-jframe-jcomponent-and-japplet
+Limitations:
+    Fails to bring up appropriate error message
+        -Missing Operands, or too many arguments, 
+        -Removing a non-empty directory without using -r argument
+    Files must be in current working directory (cd is not available)
+    
+**Check if classpaths work
+
 
 Recognition:
-First example with JScrollPane
-	MadProgrammer (Stackoverflow)
+    First example with JScrollPane
+	    MadProgrammer (Stackoverflow)
 
-First examples with JFrame, JPanel
-	843789 (Java Oracle)
-	Konstantina Dimtsa (javacodegeeks)
+    First examples with JFrame, JPanel
+	    843789 (Java Oracle)
+	    Konstantina Dimtsa (javacodegeeks)
 
+    Design system for JFrames
+        Heisenbug (Stackoverflow)
+        syb0rg (Stackoverflow)
 
-	
-
+    System for reading output of bash commands
+        ap0 (Stackoverflow)
