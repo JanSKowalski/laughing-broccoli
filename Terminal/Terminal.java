@@ -120,11 +120,13 @@ public class Terminal{
             String line = "";
             //Presents InputStream data
             while ((line = reader.readLine()) != null) {
-                    output.append(line);
+                    for (String x: line.split("\n"))
+                        output.append(x + "\n");
             }
             //Presents ErrorStream data
             while ((line = erreader.readLine()) != null) {
-                    output.append(line);
+                    for (String x: line.split("\n"))
+                        output.append(x + "\n");
             }
         }
 }
