@@ -6,18 +6,19 @@ import java.io.FileNotFoundException;
 public class Nbody{
 
   public static int numParticles;
-  public static double worldRad;
+  public static double worldRad, sunMass, _gravity;
   public static void main (String [] args){
     double totalTime = Double.parseDouble(args[0]);
     double timeChange = Double.parseDouble(args[1]);
     String inputFile = args[2];
+    _gravity = 6.674*Math.pow(10,-11);
     System.out.println("total time = " + totalTime);
     System.out.println("delta t = " + timeChange);
     System.out.println("in file: " + inputFile);
     ArrayList<Planet> planetList = new ArrayList<Planet>();
 
     planetList = setupPlanets(inputFile);
-
+    System.out.println("Sun mass = " + sunMass);
     for(int i = 0; i < planetList.size(); i++){
       planetList.get(i).DebugMe();
     }
@@ -28,23 +29,24 @@ public class Nbody{
     try{
       Scanner fileIn = new Scanner(myFile);
       ArrayList<Planet> myPlanets = new ArrayList<Planet>();
+      int x = fileIn.nextInt();
+      numParticles = x;
+      System.out.println("numPlanets: " + x);
+      double y = fileIn.nextDouble();
+      worldRad = y;
+      System.out.println("radius: " + y);
       int countLines = 0;
-      while(fileIn.hasNextLine()){
-        if(countLines == 0){
-          int x = fileIn.nextInt();
-          numParticles = x;
-          System.out.println("numPlanets: " + x);
-          countLines += 1;
+      while(countLines < numParticles){
+        double a = fileIn.nextDouble();
+        double b = fileIn.nextDouble();
+        myPlanets.add(new Planet(a, b, fileIn.nextDouble(), fileIn.nextDouble(), fileIn.nextDouble(), fileIn.next()));
+        if(a == 0.0 && b == 0.0){
+          sunMass = myPlanets.get(countLines).getMass();
         }
-        if(countLines == 1){
-          double y = fileIn.nextDouble();
-          worldRad = y;
-          System.out.println("radius: " + y);
-          countLines += 1;
-        }
-        if(countLines > 1){
-          myPlanets.add(new Planet(fileIn.nextDouble(), fileIn.nextDouble(), fileIn.nextDouble(), fileIn.nextDouble(), fileIn.nextDouble(), fileIn.next()));
-        }
+        countLines += 1;
+      }
+      for(int i = 0; i < myPlanets.size(); i++){
+        myPlanets.get(i).setupForces(sunMass, _gravity);
       }
       return myPlanets;
     }
