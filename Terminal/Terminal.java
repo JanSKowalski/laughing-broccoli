@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.text.DefaultCaret;
 
+
 public class Terminal{
 
     static JButton enterButton;
@@ -111,16 +112,20 @@ public class Terminal{
             // Run command and wait till it's done
             Process p = Runtime.getRuntime().exec(command);
             p.waitFor();
-
-            // Grab output and print to display
+            
+            // Grab output for display
             BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-
+            BufferedReader erreader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+                        
             String line = "";
+            //Presents InputStream data
             while ((line = reader.readLine()) != null) {
-                for (String x: line.split("\n"))
-                    output.append(x);
+                    output.append(line);
+            }
+            //Presents ErrorStream data
+            while ((line = erreader.readLine()) != null) {
+                    output.append(line);
             }
         }
-    }
-
+}
 }

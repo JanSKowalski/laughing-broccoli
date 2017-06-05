@@ -2,6 +2,10 @@ Terminal Documentation
 
 This project is designed to emmulate terminal capabilities within a Java environment
 
+To use project:
+    Compile Main.java and run.
+    
+    
 Commands can only be supported in this system if their executable can be found in /bin
 
 Supported bash commands:
@@ -10,24 +14,31 @@ Supported bash commands:
     pwd
     cat (Sort of, separate lines)
     ls (Sort of, separate lines)
-    rm (-r)
-    java 
-    javac
-
-
+    rm 
+    java/javac (*Any language program should be supported)
+    
+    
 Abstract Data Type: Queue
     **Will be** Used to implement a history command specific to input through 
 this java terminal, rather than the bash terminal history
 
 Limitations:
-    Fails to bring up appropriate error message
-        -Missing Operands, or too many arguments, 
-        -Removing a non-empty directory without using -r argument
+    Output is presented in one line
     Files must be in current working directory (cd is not available)
+    High-level procedures such as nano cause the terminal to crash
     
 **Check if classpaths work
 
+Obstacles Overcome:
+    Fails to bring up appropriate error message
+        -Missing Operands, or too many arguments, 
+        -Removing a non-empty directory without using -r argument
 
+
+Side Effects:
+    Commands will not appear when history is run in bash terminal
+    
+    
 Recognition:
     First example with JScrollPane
 	    MadProgrammer (Stackoverflow)
@@ -42,3 +53,6 @@ Recognition:
 
     System for reading output of bash commands
         ap0 (Stackoverflow)
+        
+    First introduction to ErrorStream
+        StarPinkER (Stackoverflow)
