@@ -4,7 +4,7 @@ public class TestFile{
         System.out.println("Happy");
         
         //Runtime Error
-        while (2 != 3)
-            System.out.print("err");
+        //while (2 != 3)
+        //    System.out.print("err");
     }
 }

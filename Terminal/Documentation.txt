@@ -7,9 +7,7 @@ This project is designed to emmulate terminal capabilities within a Java environ
 
 To use project:
     Compile Main.java and run.
-    
-    
-Commands can only be supported in this system if their executable can be found in /bin
+    Use classpaths to access files outside of current directory
 
 Supported bash commands:
     echo
@@ -19,19 +17,32 @@ Supported bash commands:
     ls 
     rm 
     java/javac (*Any language program should be supported)
+
+Supported custom commands
+
     
     
 Abstract Data Type: Queue
     **Will be** Used to implement a history command specific to input through 
 this java terminal, rather than the bash terminal history
 
+Abstract Data Type: Stack
+    **Will be** Used to implement a cd system, with directories represented by elements of the stack
+
 /~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\
+
+To do:
+    help
+    history
+    clear
+
+    *Maybe an alias system?
+    *cd?
 
 Limitations:
     Files must be in current working directory (cd is not available)
     High-level procedures such as nano cause the terminal to crash
-    
-**Check if classpaths work
+
 
 Obstacles Overcome:
     Fails to bring up appropriate error message
@@ -54,13 +65,13 @@ Recognition:
 	    Konstantina Dimtsa (javacodegeeks)
 
     Design system for JFrames
-        Heisenbug (Stackoverflow)
-        syb0rg (Stackoverflow)
+    	    Heisenbug (Stackoverflow)
+            syb0rg (Stackoverflow)
 
     System for reading output of bash commands
-        ap0 (Stackoverflow)
+            ap0 (Stackoverflow)
         
     First introduction to ErrorStream
-        StarPinkER (Stackoverflow)
+            StarPinkER (Stackoverflow)
 
 /~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\

@@ -84,16 +84,29 @@ public class Terminal{
     public static class ButtonListener implements ActionListener{
 
         public void actionPerformed(final ActionEvent ev){
+		//Commands
+			Commands commands = new Commands();
+
             if (!input.getText().trim().equals("")){
                 String cmd = ev.getActionCommand();
                 if ("Enter".equals(cmd)){
+		    //Present input in scroll pane
                     output.append(">> " + input.getText());
                     output.append("\n");
+
+			//fe
+		    if (commands.isCustom(input.getText()))
+			commands.hi();
+
+		    //Add command to history
+
                     try{
+			//Attempt to run command through bash
                         BashInterface(input.getText());
                         output.append("\n");
                     } 
                     catch (Exception e) {
+			//Not a recognized command
                         output.append(input.getText() + ": command not found");
                         output.append("\n");
                         e.printStackTrace();
