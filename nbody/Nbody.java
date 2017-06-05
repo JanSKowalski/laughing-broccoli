@@ -2,25 +2,63 @@ import java.util.Scanner;
 import java.io.File;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
+import java.util.concurrent.TimeUnit;
 
 public class Nbody{
 
   public static int numParticles;
-  public static double worldRad, sunMass, _gravity;
+  public static double worldRad, _gravity, totalTime, timeChange;
+  public static ArrayList<Planet> planetList = new ArrayList<Planet>();
   public static void main (String [] args){
-    double totalTime = Double.parseDouble(args[0]);
-    double timeChange = Double.parseDouble(args[1]);
+    totalTime = Double.parseDouble(args[0]);
+    timeChange = Double.parseDouble(args[1]);
     String inputFile = args[2];
     _gravity = 6.674*Math.pow(10,-11);
     System.out.println("total time = " + totalTime);
     System.out.println("delta t = " + timeChange);
     System.out.println("in file: " + inputFile);
-    ArrayList<Planet> planetList = new ArrayList<Planet>();
 
     planetList = setupPlanets(inputFile);
-    System.out.println("Sun mass = " + sunMass);
     for(int i = 0; i < planetList.size(); i++){
       planetList.get(i).DebugMe();
+    }
+    double timeNow = 0.0;
+    while(timeNow <= totalTime){
+      try
+      {
+        plotSystem();
+        nextPos();
+        timeNow += timeChange;
+        Thread.sleep(1);
+      }
+      catch(InterruptedException exception)
+      {
+        System.out.println("Something happened and your happy sleeping thread was rudely awakened (interruptedException)");
+      }
+    }
+  }
+
+
+  public static void plotSystem(){
+    StdDraw.clear();
+    StdDraw.setXscale(-worldRad, +worldRad);
+    StdDraw.setYscale(-worldRad, +worldRad);
+    for(Planet temp : planetList){
+      StdDraw.picture(temp.getX(), temp.getY(), temp.getName());
+    }
+  }
+
+  public static void nextPos(){
+    for(Planet y : planetList){
+      y.setupForces();
+      for(Planet x : planetList){
+        if(x != y){
+          y.addForce(x);
+        }
+      }
+    }
+    for(Planet z : planetList){
+      z.calculateNext(timeChange);
     }
   }
 
@@ -39,14 +77,10 @@ public class Nbody{
       while(countLines < numParticles){
         double a = fileIn.nextDouble();
         double b = fileIn.nextDouble();
-        myPlanets.add(new Planet(a, b, fileIn.nextDouble(), fileIn.nextDouble(), fileIn.nextDouble(), fileIn.next()));
-        if(a == 0.0 && b == 0.0){
-          sunMass = myPlanets.get(countLines).getMass();
-        }
+        double c = fileIn.nextDouble();
+        double d = fileIn.nextDouble();
+        myPlanets.add(new Planet(a, b, c, d, fileIn.nextDouble(), fileIn.next()));
         countLines += 1;
-      }
-      for(int i = 0; i < myPlanets.size(); i++){
-        myPlanets.get(i).setupForces(sunMass, _gravity);
       }
       return myPlanets;
     }
