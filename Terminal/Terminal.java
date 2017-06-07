@@ -13,42 +13,42 @@ public class Terminal{
 
     static JButton enterButton;
     
-    public static JTextArea output;
-    public static JTextField input;
-    static JFrame frame;
-    static JPanel panel;
+    public static JTextArea _output;
+    public static JTextField _input;
+    static JFrame _frame;
+    static JPanel _panel;
         
     public void Terminal(){
     //Nothing needed
     }
     
     public static void createFrame(){
-        frame = new JFrame("Terminal");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setOpaque(true);
+        _frame = new JFrame("Terminal");
+        _frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        _panel = new JPanel();
+        _panel.setLayout(new BoxLayout(_panel, BoxLayout.Y_AXIS));
+        _panel.setOpaque(true);
         
         //New object defining button action
         ButtonListener buttonListener = new ButtonListener();
                 
         //Output Panel Specs       
-        output = new JTextArea(23, 55);
-        output.setWrapStyleWord(true);
-        output.setEditable(false);
+        _output = new JTextArea(23, 55);
+        _output.setWrapStyleWord(true);
+        _output.setEditable(false);
         
         //Adds scrolling capability
-        JScrollPane scroller = new JScrollPane(output);
+        JScrollPane scroller = new JScrollPane(_output);
         scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        panel.add(scroller);
+        _panel.add(scroller);
         
         //Input Panel Specs
         JPanel inputpanel = new JPanel();
         inputpanel.setLayout(new FlowLayout());
-        input = new JTextField(20);
-        input.setActionCommand("Enter");
-        input.addActionListener(buttonListener);
+        _input = new JTextField(20);
+        _input.setActionCommand("Enter");
+        _input.addActionListener(buttonListener);
         
         //Button Specs
         enterButton = new JButton("Enter");
@@ -57,68 +57,74 @@ public class Terminal{
         enterButton.setEnabled(true);
 
         //Sets up Caret (The vertical line indicating active position)
-        DefaultCaret caret = (DefaultCaret) output.getCaret();
+        DefaultCaret caret = (DefaultCaret) _output.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         
         //Finalizes Text-input panel
-        inputpanel.add(input);
+        inputpanel.add(_input);
         inputpanel.add(enterButton);
-        panel.add(inputpanel);
+        _panel.add(inputpanel);
         
         //Adds panels to frame
-        frame.getContentPane().add(BorderLayout.CENTER, panel);
+        _frame.getContentPane().add(BorderLayout.CENTER, _panel);
         
         //Realize the components.
-        frame.pack();
-        frame.setLocationByPlatform(true);
+        _frame.pack();
+        _frame.setLocationByPlatform(true);
         
         //Starts terminal center of screen
-        frame.setLocationRelativeTo(null);
+        _frame.setLocationRelativeTo(null);
         
         //Aesthetics 
-        frame.setVisible(true);
-        frame.setResizable(false);
-        input.requestFocus();
+        _frame.setVisible(true);
+        _frame.setResizable(false);
+        _input.requestFocus();
     }
     
     public static class ButtonListener implements ActionListener{
-
+    
         public void actionPerformed(final ActionEvent ev){
-		//Commands
-			Commands commands = new Commands();
+        
+		    //Object for custom commands
+			Commands commands = new Commands(_output);
 
-            if (!input.getText().trim().equals("")){
+            //Trim input
+            if (!_input.getText().trim().equals("")){
                 String cmd = ev.getActionCommand();
                 if ("Enter".equals(cmd)){
-		    //Present input in scroll pane
-                    output.append(">> " + input.getText());
-                    output.append("\n");
+                
+		            //Present input in scroll pane
+                    _output.append(">> " + _input.getText());
+                    _output.append("\n");
 
-			//fe
-		    if (commands.isCustom(input.getText()))
-			commands.hi();
+                    //Add command to history
 
-		    //Add command to history
-
-                    try{
-			//Attempt to run command through bash
-                        BashInterface(input.getText());
-                        output.append("\n");
-                    } 
-                    catch (Exception e) {
-			//Not a recognized command
-                        output.append(input.getText() + ": command not found");
-                        output.append("\n");
-                        e.printStackTrace();
+			        //Check if command exists
+		            if (commands.isCustom(_input.getText())){
+			            commands.runCustom(_input.getText());
+			        }
+			        
+		            else{
+                        try{
+			                //Attempt to run command through bash
+                            BashInterface(_input.getText());
+                            _output.append("\n");
+                        } 
+                        catch (Exception e) {
+			                //Not a recognized command
+                            _output.append(_input.getText() + ": command not found");
+                            _output.append("\n");
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
             
             //Clears input
-            input.setText("");
+            _input.setText("");
             
             //Brings this application to forefront of screen
-            input.requestFocus();
+            _input.requestFocus();
         }
         
         public void BashInterface(String command) throws Exception{
@@ -134,12 +140,12 @@ public class Terminal{
             //Presents InputStream data
             while ((line = reader.readLine()) != null) {
                     for (String x: line.split("\n"))
-                        output.append(x + "\n");
+                        _output.append(x + "\n");
             }
             //Presents ErrorStream data
             while ((line = erreader.readLine()) != null) {
                     for (String x: line.split("\n"))
-                        output.append(x + "\n");
+                        _output.append(x + "\n");
             }
         }
 }

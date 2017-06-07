@@ -1,0 +1,9 @@
+help
+history
+*Add custom commands above, bash commands below
+echo
+mkdir
+pwd
+cat 
+ls 
+rm 

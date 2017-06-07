@@ -19,12 +19,8 @@ Supported bash commands:
     java/javac (*Any language program should be supported)
 
 Supported custom commands
-
+    help (Displays list of supported commands)
     
-    
-Abstract Data Type: Queue
-    **Will be** Used to implement a history command specific to input through 
-this java terminal, rather than the bash terminal history
 
 Abstract Data Type: Stack
     **Will be** Used to implement a cd system, with directories represented by elements of the stack
@@ -32,7 +28,6 @@ Abstract Data Type: Stack
 /~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\
 
 To do:
-    help
     history
     clear
 
@@ -42,7 +37,7 @@ To do:
 Limitations:
     Files must be in current working directory (cd is not available)
     High-level procedures such as nano cause the terminal to crash
-
+    Custom commands cannot contain *
 
 Obstacles Overcome:
     Fails to bring up appropriate error message
