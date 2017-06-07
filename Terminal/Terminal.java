@@ -19,7 +19,7 @@ public class Terminal{
     static JPanel _panel;
         
     public void Terminal(){
-    //Nothing needed
+	//Nothing needed
     }
     
     public static void createFrame(){
@@ -83,37 +83,42 @@ public class Terminal{
     
     public static class ButtonListener implements ActionListener{
     
-        public void actionPerformed(final ActionEvent ev){
+        public void actionPerformed(final ActionEvent ev) {
         
-		    //Object for custom commands
-			Commands commands = new Commands(_output);
-
+	    //Object for custom commands
+	    Commands commands = new Commands(_output);
+            try{
+		commands.setStack();
+	    }
+	    catch (Exception e) {
+		e.printStackTrace();
+            }
             //Trim input
             if (!_input.getText().trim().equals("")){
                 String cmd = ev.getActionCommand();
                 
                 //If button is pressed
                 if ("Enter".equals(cmd)){                
-		            //Present input in scroll pane
+		    //Present input in scroll pane
                     _output.append(">> " + _input.getText());
                     _output.append("\n");
 
                     //Add command to history
                     commands.addToHistory(_input.getText());
 
-			        //Check if command exists
-		            if (commands.isCustom(_input.getText())){
-			            commands.runCustom(_input.getText());
-			        }
+		    //Check if command exists
+		    if (commands.isCustom(_input.getText())){
+			commands.runCustom(_input.getText());
+		    }
 			        
-		            else{
+		    else{
                         try{
-			                //Attempt to run command through bash
+			    //Attempt to run command through bash
                             BashInterface(_input.getText());
                             _output.append("\n");
                         } 
                         catch (Exception e) {
-			                //Not a recognized command
+			    //Not a recognized command
                             _output.append(_input.getText() + ": command not found");
                             _output.append("\n");
                             e.printStackTrace();
@@ -141,14 +146,14 @@ public class Terminal{
             String line = "";
             //Presents InputStream data
             while ((line = reader.readLine()) != null) {
-                    for (String x: line.split("\n"))
-                        _output.append(x + "\n");
+		for (String x: line.split("\n"))
+		    _output.append(x + "\n");
             }
             //Presents ErrorStream data
             while ((line = erreader.readLine()) != null) {
-                    for (String x: line.split("\n"))
-                        _output.append(x + "\n");
+		for (String x: line.split("\n"))
+		    _output.append(x + "\n");
             }
         }
-}
+    }
 }

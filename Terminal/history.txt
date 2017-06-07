@@ -1,0 +1,25 @@
+help
+history
+cat help.txt
+history
+help
+hi
+help
+help
+help
+help
+help
+help
+help
+help
+help
+help
+help
+help
+help
+help
+help
+help
+help
+help
+help

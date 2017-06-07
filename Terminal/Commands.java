@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.io.FileWriter;
+import java.io.InputStreamReader;
 
 public class Commands{
 
-	//Stack
+    //Stack for directory
+    Stack<String> directory;
 	
-	//Output area for functions
+    //Output area for functions
     public JTextArea _output;
     
     //For reading through help.txt and history.txt
@@ -24,17 +26,17 @@ public class Commands{
     
     
     //Constructor Method
-	public Commands(JTextArea output){
-	    //Sets output as Terminal textbox
-	    _output = output;
+    public Commands(JTextArea output){
+	//Sets output as Terminal textbox
+	_output = output;
 	    
-	    //Initializes ArrayLists
-	    cmds = new ArrayList<String>();
-	    customcmds = new ArrayList<String>();
-	    history = new ArrayList<String>();
+	//Initializes ArrayLists
+	cmds = new ArrayList<String>();
+	customcmds = new ArrayList<String>();
+	history = new ArrayList<String>();
 	    
-	    //Automatically creates a list of functions upon creation
-	    try {
+	//Automatically creates a list of functions upon creation
+	try {
             file = new BufferedReader(new FileReader("help.txt"));
             String line;
             
@@ -57,29 +59,29 @@ public class Commands{
         } 
         catch (IOException e) {
             System.err.println("IOException: " + e.getMessage());
-        }  
-	}
+        }  	    
+    }
 	
-	public boolean isCustom(String command){
-		return (customcmds.indexOf(command) != -1);
-	}
+    public boolean isCustom(String command){
+	return (customcmds.indexOf(command) != -1);
+    }
 
     public void runCustom(String command){
         if (command.equals("help")) help();
         if (command.equals("history")) history();
     }
     
-	public void help(){
-	    //Displays all supported commands
-	    for (String x: cmds){
-		    _output.append(x);
-		    _output.append("\n");
-		}		
-	}
+    public void help(){
+	//Displays all supported commands
+	for (String x: cmds){
+	    _output.append(x);
+	    _output.append("\n");
+	}		
+    }
 	
-	public void addToHistory(String command){
-	    //Adds command to history.txt
-	    try{
+    public void addToHistory(String command){
+	//Adds command to history.txt
+	try{
             String filename= "history.txt";
             //The true indicates data to be appended
             FileWriter fw = new FileWriter(filename,true); 
@@ -110,9 +112,60 @@ public class Commands{
         } 
         
         //Displays history 
-	    for (String x: history){
-		    _output.append(x);
-		    _output.append("\n");
-		}		
+	for (String x: history){
+	    _output.append(x);
+	    _output.append("\n");
+	}		
+    }
+
+    public void setStack() throws Exception{
+	//Initializes Stack
+	directory = new NodeStack<String>();
+
+	// Run command and wait till it's done
+	Process p = Runtime.getRuntime().exec("pwd");
+	p.waitFor();
+            
+	// Set up for info
+	BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                        
+	String line = "";
+	String pwd = "";
+	//Presents InputStream data
+	while ((line = reader.readLine()) != null) {
+		 pwd = line;
 	}
+
+	directory.push("/");
+	for (String x: pwd.split("/"))
+		directory.push(x);
+	printStack();
+    }
+
+    public String printStack(){
+	//Final string, describes current directory
+	String currentdir = "";
+
+	//Temporary stack to bounce through elements
+	Stack<String> temp = new NodeStack<String>();
+	temp.push("end");
+	/*
+	if(directory.peek() != null){
+		temp.push(directory.pop());
+	}
+	*/
+	while (!directory.peek().equals("/"))
+		temp.push(directory.pop());
+
+	while (!temp.peek().equals("end")){
+		currentdir += "/";
+		currentdir += temp.peek();
+		directory.push(temp.pop());
+	}
+	_output.append(currentdir);
+	_output.append("\n");
+
+	return currentdir;
+	
+    }
 }

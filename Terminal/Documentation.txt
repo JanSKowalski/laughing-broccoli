@@ -2,6 +2,7 @@
 Terminal Documentation
 
 This project is designed to emmulate terminal capabilities within a Java environment
+Tested and built within a ubuntu environment
 
 /~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\
 
