@@ -8,6 +8,7 @@ This project is designed to emmulate terminal capabilities within a Java environ
 To use project:
     Compile Main.java and run.
     Use classpaths to access files outside of current directory
+    Use the command "help" to see a list of supported commands
 
 Supported bash commands:
     echo
@@ -20,7 +21,8 @@ Supported bash commands:
 
 Supported custom commands
     help (Displays list of supported commands)
-    
+    history (Displays list of local prompts (independent of bash shell))
+        
 
 Abstract Data Type: Stack
     **Will be** Used to implement a cd system, with directories represented by elements of the stack
@@ -28,7 +30,6 @@ Abstract Data Type: Stack
 /~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\
 
 To do:
-    history
     clear
 
     *Maybe an alias system?
@@ -53,14 +54,14 @@ Side Effects:
 
 Recognition:
     First example with JScrollPane
-	    MadProgrammer (Stackoverflow)
+            MadProgrammer (Stackoverflow)
 
     First examples with JFrame, JPanel
-	    843789 (Java Oracle)
-	    Konstantina Dimtsa (javacodegeeks)
+            843789 (Java Oracle)
+            Konstantina Dimtsa (javacodegeeks)
 
     Design system for JFrames
-    	    Heisenbug (Stackoverflow)
+            Heisenbug (Stackoverflow)
             syb0rg (Stackoverflow)
 
     System for reading output of bash commands
@@ -68,5 +69,11 @@ Recognition:
         
     First introduction to ErrorStream
             StarPinkER (Stackoverflow)
+            
+    Reading from a file
+            aioobe (Stackoverflow)
+            
+    Writing to a file
+            northpole (Stackoverflow)
 
 /~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\

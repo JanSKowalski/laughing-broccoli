@@ -91,13 +91,15 @@ public class Terminal{
             //Trim input
             if (!_input.getText().trim().equals("")){
                 String cmd = ev.getActionCommand();
-                if ("Enter".equals(cmd)){
                 
+                //If button is pressed
+                if ("Enter".equals(cmd)){                
 		            //Present input in scroll pane
                     _output.append(">> " + _input.getText());
                     _output.append("\n");
 
                     //Add command to history
+                    commands.addToHistory(_input.getText());
 
 			        //Check if command exists
 		            if (commands.isCustom(_input.getText())){

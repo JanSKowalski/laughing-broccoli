@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.io.FileWriter;
 
 public class Commands{
 
@@ -14,12 +15,13 @@ public class Commands{
     //For reading through help.txt and history.txt
     public BufferedReader file;
     
-    //Command list
+    //Command lists
     public ArrayList<String> cmds;
     public ArrayList<String> customcmds;
     
     //History
     public ArrayList<String> history;
+    
     
     //Constructor Method
 	public Commands(JTextArea output){
@@ -54,8 +56,8 @@ public class Commands{
             file.close();
         } 
         catch (IOException e) {
-        }
-        
+            System.err.println("IOException: " + e.getMessage());
+        }  
 	}
 	
 	public boolean isCustom(String command){
@@ -64,10 +66,51 @@ public class Commands{
 
     public void runCustom(String command){
         if (command.equals("help")) help();
+        if (command.equals("history")) history();
     }
     
 	public void help(){
+	    //Displays all supported commands
 	    for (String x: cmds){
+		    _output.append(x);
+		    _output.append("\n");
+		}		
+	}
+	
+	public void addToHistory(String command){
+	    //Adds command to history.txt
+	    try{
+            String filename= "history.txt";
+            //The true indicates data to be appended
+            FileWriter fw = new FileWriter(filename,true); 
+            fw.write(command);
+            fw.write("\n");
+            fw.close();
+        }
+        catch(IOException e){
+            System.err.println("IOException: " + e.getMessage());
+        }
+    }
+        
+    public void history(){
+        //Read through history.txt
+        try {
+            file = new BufferedReader(new FileReader("history.txt"));
+            String line;
+            
+            //Adds content of history.txt into history
+            while ((line = file.readLine()) != null)
+                for (String x: line.split("\n")){
+                    history.add(x);
+                }
+            file.close();
+        } 
+        catch (IOException e) {
+            System.err.println("IOException: " + e.getMessage());
+        } 
+        
+        //Displays history 
+	    for (String x: history){
 		    _output.append(x);
 		    _output.append("\n");
 		}		
