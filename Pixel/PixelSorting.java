@@ -5,10 +5,13 @@ import javax.imageio.ImageIO;
 import java.util.*;
 
 public class PixelSorting{
+  BufferedImage image;
 
   public static void main(String args[]) throws IOException{
-    BufferedImage image = ImageIO.read(new File("C:\\Users\\AnnaYang\\Desktop\\DSC_1452.JPG"));
-    return RedSort(image);
+    image = ImageIO.read(new File("image"));
+    image.RedSort();
+    image.GreenSort();
+    image.BlueSort();
 
   }
   public static int[] quickSort(int[] arr, int low, int high){
@@ -36,9 +39,9 @@ public class PixelSorting{
     }
 
 
-  public static RedSort(BufferedImage image){
-    int width = image.getWidth();
-    int height = image.getHeight();
+  public void RedSort(){
+    int width = this.getWidth();
+    int height = this.getHeight();
     int totalPixels = (width * height);
     Color[] values = new Color[totalPixels];
     int i = 0;
@@ -69,9 +72,9 @@ public class PixelSorting{
   }
 
 
-    public static GreenSort(BufferedImage image){
-      int width = image.getWidth();
-      int height = image.getHeight();
+    public void GreenSort(){
+      int width = this.getWidth();
+      int height = this.getHeight();
       int totalPixels = (width * height);
       Color[] values = new Color[totalPixels];
       int i = 0;
@@ -100,9 +103,9 @@ public class PixelSorting{
       }
     }
 
-    public static BlueSort(BufferedImage image){
-      int width = image.getWidth();
-      int height = image.getHeight();
+    public void BlueSort(){
+      int width = this.getWidth();
+      int height = this.getHeight();
       int totalPixels = (width * height);
       Color[] values = new Color[totalPixels];
       int i = 0;
