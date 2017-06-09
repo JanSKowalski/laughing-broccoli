@@ -8,7 +8,7 @@ public class PixelSorting{
 
   public static void main(String args[]) throws IOException{
     BufferedImage image = ImageIO.read(new File("C:\\Users\\AnnaYang\\Desktop\\DSC_1452.JPG"));
-    return RGBValues(image);
+    return RedSort(image);
 
   }
   public static int[] quickSort(int[] arr, int low, int high){
@@ -21,7 +21,7 @@ public class PixelSorting{
     int j = high;
     while (i < j){
       while (arr[i] < pivot) i++;
-      while (arr[j] > pivot) j
+      while (arr[j] > pivot) j++;
       if(i <= j) {
         int tmp = arr[i];
         arr[i] = arr[j];
@@ -31,12 +31,12 @@ public class PixelSorting{
       }
     }
     if (low < j) quickSort(arr, low, j);
-    if (high > i) quickSort(arr, i high);
+    if (high > i) quickSort(arr, i, high);
 
     }
 
 
-  public void RedSort(BufferedImage image){
+  public static RedSort(BufferedImage image){
     int width = image.getWidth();
     int height = image.getHeight();
     int totalPixels = (width * height);
@@ -49,6 +49,8 @@ public class PixelSorting{
       }
     }
     int[] red = new int[values.length];
+    int[] green = new int[values.length];
+    int[] blue = new int[values.length];
     for (int pix = 0; pix < totalPixels; pix++){
       Color c = values[i];
       red[pix] = c.getRed();
@@ -79,8 +81,9 @@ public class PixelSorting{
           i++;
         }
       }
+      int[] red = new int[values.length];
       int[] green = new int[values.length];
-      for (int pix = 0; pix < totalPixels; pix++){
+      int[] blue = new int[values.length];      for (int pix = 0; pix < totalPixels; pix++){
         Color c = values[i];
         green[pix] = c.getGreen();
         red[pix] = c.getRed();
@@ -109,8 +112,9 @@ public class PixelSorting{
           i++;
         }
       }
-      int[] blue = new int[values.length];
-      for (int pix = 0; pix < totalPixels; pix++){
+      int[] red = new int[values.length];
+      int[] green = new int[values.length];
+      int[] blue = new int[values.length];      for (int pix = 0; pix < totalPixels; pix++){
         Color c = values[i];
         blue[pix] = c.getBlue();
         green[pix] = c.getGreen();
