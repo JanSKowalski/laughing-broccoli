@@ -7,7 +7,7 @@ import java.util.*;
 public class PixelSorting{
 
   public static void main(String args[]) throws IOException{
-    BufferedImage image = ImageIO.read(new File("C:\\Users\\AnnaYang\\Desktop\\DSC_1452.JPG"));
+    BufferedImage image = ImageIO.read(new File("file path"));
     return RGBValues(image);
 
   }
