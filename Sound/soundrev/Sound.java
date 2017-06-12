@@ -4,7 +4,7 @@ import java.lang.Math.*;
 
 public class Sound
 {
-static int sensitivity = 5;
+static int sensitivity = 800;
 static int numFrames = 700000000;
     public static void main(String[] args)
     {
@@ -32,8 +32,10 @@ static int numFrames = 700000000;
 	      double[][] bufferout = new double[numChannels][numFrames];
 	      inToOut(bufferin, bufferout);
 		for (double[] channel : bufferout) {
-			double[] rev = reverseByMeasure(channel, sensitivity);
-			for (int i = 0; i < channel.length; i++) channel[i] = channel[i] * 0.0 + rev[i];
+			double[] chancopy = new double[channel.length];
+			System.arraycopy( channel, 0, chancopy, 0, channel.length );
+			double[] rev = reverseByMeasure(chancopy, sensitivity);
+			for (int i = 0; i < channel.length; i++) channel[i] = channel[i] * 1.0 + rev[i];
 		}
 	      WavFile outFile = WavFile.newWavFile(new File(args[1]), numChannels, numFrames, validBits, sampleRate);
 	      outFile.writeFrames(bufferout, numFrames);
