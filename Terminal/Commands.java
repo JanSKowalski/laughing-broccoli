@@ -24,9 +24,15 @@ public class Commands{
     //History
     public ArrayList<String> history;
     
+    //Determines whether class path is added to command
+    boolean _pathactive;
+    
     
     //Constructor Method
     public Commands(JTextArea output){
+    //By default, -classpath is not automatically inserted into command
+    _pathactive = false;
+    
 	//Sets output as Terminal textbox
 	_output = output;
 	    
@@ -62,13 +68,17 @@ public class Commands{
         }  	    
     }
 	
+	//Checks to see if command is recognized
     public boolean isCustom(String command){
 	return (customcmds.indexOf(command) != -1);
     }
 
+    //Runs proper command
     public void runCustom(String command){
         if (command.equals("help")) help();
         if (command.equals("history")) history();
+        if (command.equals("toggle")) toggle();
+        if (command.equals("print")) print();
     }
     
     public void help(){
@@ -138,8 +148,8 @@ public class Commands{
 
 	directory.push("/");
 	for (String x: pwd.split("/"))
-		directory.push(x);
-	printStack();
+	    if (x != "")
+	        directory.push(x);
     }
 
     public String printStack(){
@@ -149,11 +159,7 @@ public class Commands{
 	//Temporary stack to bounce through elements
 	Stack<String> temp = new NodeStack<String>();
 	temp.push("end");
-	/*
-	if(directory.peek() != null){
-		temp.push(directory.pop());
-	}
-	*/
+
 	while (!directory.peek().equals("/"))
 		temp.push(directory.pop());
 
@@ -168,4 +174,18 @@ public class Commands{
 	return currentdir;
 	
     }
+    
+    //toggles the automatic addition of -classpath to commands, default false
+    public void toggle(){
+        _pathactive = false && _pathactive;
+        if (_pathactive)
+            _output.append("Commands will now have -classpath appended to them");
+        else    
+            _output.append("Commands will not have -classpath appended to them");
+	    _output.append("\n");
+	}
+	
+	public void print(){
+	    _output.append(_pathactive + "\n");
+	}
 }
