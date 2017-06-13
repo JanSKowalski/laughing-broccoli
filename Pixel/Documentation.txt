@@ -1,0 +1,8 @@
+Documentation
+
+This is supposed to sort the pixels in a picture based on their rgb values
+
+Recognition:
+How to use Buttons (Oracle)
+How to use JPanel (Oracle)
+Reading and Writing a Image (Stack Overflow)
