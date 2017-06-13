@@ -1,0 +1,11 @@
+help
+history
+toggle
+print
+*Add custom commands above, bash commands below
+echo
+mkdir
+pwd
+cat 
+ls 
+rm 

@@ -1,0 +1,80 @@
+/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\
+Terminal Documentation
+
+This project is designed to emmulate terminal capabilities within a Java environment
+Tested and built within a ubuntu environment
+
+/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\
+
+To use project:
+    Compile Main.java and run.
+    Use classpaths to access files outside of current directory
+    Use the command "help" to see a list of supported commands
+
+Supported bash commands:
+    echo
+    mkdir
+    pwd
+    cat 
+    ls 
+    rm 
+    java/javac (*Any language program should be supported)
+
+Supported custom commands
+    help (Displays list of supported commands)
+    history (Displays list of local prompts (independent of bash shell))
+        
+
+Abstract Data Type: Stack
+    **Will be** Used to implement a cd system, with directories represented by elements of the stack
+
+/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\
+
+To do:
+    clear
+
+    *Maybe an alias system?
+    *cd?
+
+Limitations:
+    Files must be in current working directory (cd is not available)
+    High-level procedures such as nano cause the terminal to crash
+    Custom commands cannot contain *
+
+Obstacles Overcome:
+    Fails to bring up appropriate error message
+        -Missing Operands, or too many arguments, 
+        -Removing a non-empty directory without using -r argument
+    Output is presented in one line
+
+
+Side Effects:
+    Commands will not appear when history is run in bash terminal
+    
+/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\
+
+Recognition:
+    First example with JScrollPane
+            MadProgrammer (Stackoverflow)
+
+    First examples with JFrame, JPanel
+            843789 (Java Oracle)
+            Konstantina Dimtsa (javacodegeeks)
+
+    Design system for JFrames
+            Heisenbug (Stackoverflow)
+            syb0rg (Stackoverflow)
+
+    System for reading output of bash commands
+            ap0 (Stackoverflow)
+        
+    First introduction to ErrorStream
+            StarPinkER (Stackoverflow)
+            
+    Reading from a file
+            aioobe (Stackoverflow)
+            
+    Writing to a file
+            northpole (Stackoverflow)
+
+/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\*/~\
