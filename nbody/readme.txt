@@ -1,38 +1,29 @@
 /*******************************************************************************
- *  Name:    
- *  NetID:   
- *  Precept: 
+ *  Name:    Elijah Karshner
  ******************************************************************************/
 
 Programming Assignment 2: N-Body Simulation
 
-Operating system (such as OS X or Windows):    
-Machine (such as Dell Latitude, MacBook Pro):  
-Text editor (such as DrJava):                  
-Hours to complete assignment (optional):       
+How to use: Navigate to the nbody directory.
+Run: javac Nbody.java
 
+To run the code:
+java Nbody int x int y String z
+This takes three parameters from the command line:
+x = total time
+y = time change between calculations
+z = file path
 
+Possible syntax:
+java NBody 157788000.0 25000.0 planets.txt
+-Simulates the Solar System, with 5 planets
 
-/**********************************************************************
- *  Did you receive help from classmates, past COS 126 students, or
- *  anyone else? If so, please list their names.  ("A Sunday lab TA"
- *  or "Office hours on Thursday" is ok if you don't know their name.)
- **********************************************************************/
+java NBody 157788000.0 25000.0 3body.txt
+-Simulates a 3 body system
 
-Yes or no?
+java NBody 157788000.0 25000.0 its-a-trap.txt
+-Surprise Star Wars reference!
 
+This code calculates the gravitational forces on n bodies in zero gravity space, updating from time = 0 to the desired end time by increments of the given time change, and draws the positions after a 1ms delay between iterations. It uses a new class, called Planet, and an ArrayList of such objects.
 
-
-/**********************************************************************
- *  Did you encounter any serious problems? If so, please describe.
- **********************************************************************/
-
-Yes or no?
-
-
-
-/**********************************************************************
- *  List any other comments here.                                     
- **********************************************************************/
-
-
+Limitations: Since this uses the Draw library of java, it is constantly redrawing the planets, giving them a frenzied, stuttering look.
